@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8f4f7">
+  <meta name="description" content="A clear, current weather forecast for your city or location.">
+  <title>Skyward | Weather Forecast</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="weather-clear">
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Skyward weather home">
+      <span class="brand-icon" aria-hidden="true"><span></span></span>
+      <span>skyward<span class="brand-period">.</span></span>
+    </a>
+    <p class="topbar-note"><span class="live-dot" aria-hidden="true"></span> Live conditions <span class="topbar-divider">/</span> Open-Meteo</p>
+  </header>
+
+  <main class="page-shell" id="top">
+    <section class="welcome-row" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">YOUR WEATHER, AT A GLANCE</p>
+        <h1 id="page-title">A little more <span>in the know.</span></h1>
+      </div>
+      <form class="search-form" id="search-form" role="search">
+        <label class="visually-hidden" for="city-search">Search for a city</label>
+        <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"></circle><path d="m16 16 4.2 4.2"></path></svg>
+        <input id="city-search" name="city" type="search" placeholder="Search a city" autocomplete="off" required>
+        <button class="search-submit" type="submit" aria-label="Search city">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"></path></svg>
+        </button>
+      </form>
+    </section>
+
+    <div class="toolbar">
+      <button class="location-button" id="location-button" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+        <span>Use my location</span>
+      </button>
+      <div class="unit-control" role="group" aria-label="Temperature units">
+        <button class="unit-button is-selected" type="button" data-unit="celsius" aria-pressed="true">°C</button>
+        <button class="unit-button" type="button" data-unit="fahrenheit" aria-pressed="false">°F</button>
+      </div>
+    </div>
+
+    <p class="status-message" id="status-message" role="status" aria-live="polite"></p>
+
+    <section class="current-weather" id="current-weather" aria-labelledby="location-name" aria-busy="true">
+      <div class="current-copy">
+        <div class="location-line">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+          <h2 id="location-name">Finding your forecast</h2>
+        </div>
+        <p class="current-date" id="current-date">Fetching current conditions...</p>
+        <div class="temperature-row">
+          <p class="temperature" id="current-temperature" aria-label="Current temperature">--<span>°</span></p>
+          <div class="condition-block">
+            <div class="condition-icon" id="current-icon" aria-hidden="true"></div>
+            <p id="current-condition">Loading weather</p>
+          </div>
+        </div>
+        <p class="high-low" id="high-low">Today <span>H: --°</span><span>L: --°</span></p>
+      </div>
+      <div class="sky-art" id="sky-art" aria-hidden="true">
+        <span class="sky-ring sky-ring-one"></span>
+        <span class="sky-ring sky-ring-two"></span>
+        <div class="sky-icon" id="sky-icon"></div>
+        <span class="sky-caption" id="sky-caption">A fresh look outside</span>
+      </div>
+    </section>
+
+    <section class="forecast-section" aria-labelledby="forecast-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE NEXT FEW DAYS</p><h2 id="forecast-title">5-day forecast</h2></div>
+        <p class="section-note" id="forecast-note">Your week, weather-wise</p>
+      </div>
+      <div class="forecast-list" id="forecast-list" aria-live="polite">
+        <div class="forecast-placeholder">Your forecast will appear here.</div>
+      </div>
+    </section>
+
+    <section class="details-section" aria-labelledby="details-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">THE DETAILS</p><h2 id="details-title">Right now</h2></div>
+        <span class="updated-label" id="updated-label">Updated just now</span>
+      </div>
+      <div class="details-grid">
+        <article class="detail-item">
+          <div class="detail-top"><span class="detail-icon feels-icon" aria-hidden="true">◉</span><h3>Feels like</h3></div>
+          <p class="detail-value" id="feels-like">--<span>°</span></p>
+          <p class="detail-hint" id="feels-hint">What it feels like outside</p>
+        </article>
+        <article class="detail-item">
+          <div class="detail-top"><span class="detail-icon humidity-icon" aria-hidden="true">〰</span><h3>Humidity</h3></div>
+          <p class="detail-value" id="humidity">--<span>%</span></p>
+          <p class="detail-hint">Relative humidity</p>
+        </article>
+        <article class="detail-item">
+          <div class="detail-top"><span class="detail-icon wind-icon" aria-hidden="true">≋</span><h3>Wind</h3></div>
+          <p class="detail-value" id="wind-speed">--<span> km/h</span></p>
+          <p class="detail-hint">Near the surface</p>
+        </article>
+        <article class="detail-item">
+          <div class="detail-top"><span class="detail-icon pressure-icon" aria-hidden="true">⌁</span><h3>Pressure</h3></div>
+          <p class="detail-value" id="pressure">--<span> hPa</span></p>
+          <p class="detail-hint">Atmospheric pressure</p>
+        </article>
+        <article class="detail-item">
+          <div class="detail-top"><span class="detail-icon visibility-icon" aria-hidden="true">◎</span><h3>Visibility</h3></div>
+          <p class="detail-value" id="visibility">--<span> km</span></p>
+          <p class="detail-hint">Distance you can see</p>
+        </article>
+      </div>
+    </section>
+
+    <footer class="page-footer">
+      <span>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></span>
+      <span>Clear skies, wherever you are.</span>
+    </footer>
+  </main>
+</body>
+</html>
